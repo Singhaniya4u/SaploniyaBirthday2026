@@ -285,3 +285,9 @@ h1 {
         height: 280px;
     }
 }
+
+.button-gap {
+    width: 100%;
+    height: 180px;
+    background: transparent;
+}
