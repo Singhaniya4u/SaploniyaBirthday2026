@@ -1,0 +1,230 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(-45deg, #ff9a9e, #fecfef, #a1c4fd, #c2e9fb);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 20px 80px 20px;
+    overflow-x: hidden;
+    position: relative;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Balloon Background Layer */
+#balloon-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Base Balloon Styling */
+.individual-balloon {
+    position: absolute;
+    bottom: -150px;
+    border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%; /* Creates balloon teardrop shape */
+    box-shadow: inset -6px -10px 20px rgba(0,0,0,0.15), 2px 8px 15px rgba(0,0,0,0.1);
+    animation: floatUpUp 14s linear infinite;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: transform 0.2s ease;
+}
+
+/* Balloon Highlights */
+.individual-balloon::before {
+    content: "";
+    position: absolute;
+    top: 12%;
+    left: 15%;
+    width: 20%;
+    height: 15%;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+}
+
+/* Balloon String */
+.individual-balloon::after {
+    content: "";
+    position: absolute;
+    bottom: -30px;
+    left: 49%;
+    width: 2px;
+    height: 35px;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.individual-balloon:hover {
+    transform: scale(1.15) rotate(5deg);
+}
+
+/* Pop Animation */
+.individual-balloon.pop {
+    animation: balloonPopUp 0.25s ease-out forwards !important;
+}
+
+@keyframes floatUpUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    5% { opacity: 0.9; }
+    95% { opacity: 0.9; }
+    100% {
+        transform: translateY(-130vh) rotate(15deg);
+        opacity: 0;
+    }
+}
+
+@keyframes balloonPopUp {
+    0% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.4); opacity: 0.3; }
+    100% { transform: scale(0); opacity: 0; }
+}
+
+/* Web Content Layout */
+.container {
+    max-width: 950px;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    z-index: 2; 
+}
+
+.glass {
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.hero {
+    margin-bottom: 30px;
+}
+
+h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    color: #ff477e;
+    line-height: 1.2;
+}
+
+.highlight {
+    color: #7000ff;
+    font-size: clamp(3.5rem, 10vw, 5rem);
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.subtitle {
+    font-size: clamp(0.95rem, 3vw, 1.2rem);
+    margin-top: 15px;
+    color: #444;
+    font-weight: 500;
+}
+
+.message-card {
+    padding: 25px;
+    margin: 0 auto 40px auto;
+    max-width: 700px;
+    font-size: clamp(1rem, 2.5vw, 1.15rem);
+    line-height: 1.6;
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.photo-frame {
+    padding: 12px;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    width: 260px;
+    height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.photo-frame:hover {
+    transform: translateY(-12px) scale(1.03);
+}
+
+.photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 16px;
+}
+
+.btn {
+    padding: 16px 40px;
+    font-size: clamp(1rem, 3vw, 1.25rem);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(45deg, #ff477e, #ff7b9c);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(255, 71, 126, 0.4);
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(255, 71, 126, 0.6);
+}
+
+/* Floating Hint Bar */
+.hint-bar {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 24px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #444;
+    z-index: 10;
+    white-space: nowrap;
+    animation: pulseHint 2s infinite ease-in-out;
+}
+
+@keyframes pulseHint {
+    0%, 100% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.03); box-shadow: 0 10px 25px rgba(255, 71, 126, 0.2); }
+}
+
+@media (max-width: 600px) {
+    .hint-bar {
+        font-size: 0.85rem;
+        width: 90%;
+        text-align: center;
+        white-space: normal;
+    }
+}
